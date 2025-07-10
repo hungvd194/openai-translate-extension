@@ -28,13 +28,14 @@ A simple Chrome extension for translating text using OpenAI's GPT API. Supports 
 
 ## 📁 Folder Structure
 
+```
 openai-translate-extension/
 ├── manifest.json
 ├── popup.html
 ├── popup.js
 ├── style.css
 └── icon.png
-
+```
 
 ## 📝 License
 
