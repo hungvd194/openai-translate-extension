@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>OpenAI Translator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>OpenAI Translator</h1>
+      </div>
+      <div class="tab-header">
+        <button class="tab-btn active" id="tab-translate-btn">Dịch thuật</button>
+        <button class="tab-btn" id="tab-settings-btn">Cài đặt</button>
+      </div>
+      <!-- Main Translator Card -->
+      <div class="tab-content" id="tab-translate">
+        <div class="translator-card">
+          <!-- Input Section -->
+          <div class="section">
+            <div class="section-title">Nhập văn bản cần dịch</div>
+            <textarea id="inputText" class="textarea" placeholder="Nhập văn bản bạn muốn dịch..."></textarea>
+          </div>
+          <!-- Language Selection -->
+          <div class="section">
+            <div class="section-title">Chọn ngôn ngữ đích</div>
+            <div class="radio-group">
+              <div class="radio-option">
+                <input type="radio" id="english" name="targetLanguage" value="English" checked>
+                <label for="english">en</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="vietnamese" name="targetLanguage" value="Vietnamese">
+                <label for="vietnamese">🇻🇳</label>
+              </div>
+              <div class="radio-option">
+                <input type="radio" id="japanese" name="targetLanguage" value="Japanese">
+                <label for="japanese">🇯🇵</label>
+              </div>
+            </div>
+          </div>
+          <!-- Translate Button -->
+          <div class="translate-section">
+            <button id="translateBtn" class="translate-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg> Dịch ngay </button>
+          </div>
+          <!-- Output Section -->
+          <div class="section" style="margin-bottom:0">
+            <div class="section-title">Kết quả dịch</div>
+            <textarea id="outputText" class="textarea output-textarea" placeholder="Kết quả dịch sẽ hiển thị ở đây..." readonly></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content" id="tab-settings" style="display:none;">
+        <div class="section-title">API Key</div>
+        <div id="apiKeySection">
+          <input type="password" id="apiKeyInput" class="apikey-input">
+          <button id="saveApiKeyBtn" class="translate-btn" style="margin-top:0.5rem;font-size: 1rem;">Lưu</button>
+          <span id="saveStatus" style="margin-left: 8px; color: green;"></span>
+        </div>
+      </div>
+    </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
