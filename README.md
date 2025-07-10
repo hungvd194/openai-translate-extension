@@ -2,8 +2,6 @@
 
 A simple Chrome extension for translating text using OpenAI's GPT API. Supports **Vietnamese**, **English**, and **Japanese**.
 
-![Screenshot](bc5b536b-7a12-49cd-a664-1610422275d0.png)
-
 ## ✨ Features
 
 - Translate any text directly via popup
