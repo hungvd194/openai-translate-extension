@@ -17,13 +17,13 @@ function renderApiKeySection(hasKey) {
   const section = document.getElementById('apiKeySection');
   if (hasKey) {
     section.innerHTML = `
-      <span style="color: green;">API Key đã được lưu.</span>
-      <br><span style="color:#666;font-size:12px;">API Key sẽ không bao giờ hiển thị lại vì lý do bảo mật.</span><br>
-      <button id="editApiKeyBtn" class="btn" class="font-size:0.8rem;margin-top:0.5rem;">Nhập lại API Key</button>
-      <button id="removeApiKeyBtn" style="margin-left:8px;border:none;background:transparent;color:red;">Xóa API Key</button>
+      <span style="color: green;">API Key has been saved.</span>
+      <br><span style="color:#666;font-size:12px;">The API Key will never be shown again for security reasons.</span><br>
+      <button id="editApiKeyBtn" class="btn" class="font-size:0.8rem;margin-top:0.5rem;">Re-enter API Key</button>
+      <button id="removeApiKeyBtn" style="margin-left:8px;border:none;background:transparent;color:red;">Delete API Key</button>
       <span id="saveStatus" style="margin-left: 8px;"></span>
       <div id="apiKeyInputArea" style="display:none; margin-top:10px;">
-        <input type="password" id="apiKeyInput" placeholder="Nhập API Key mới" class="apikey-input">
+        <input type="password" id="apiKeyInput" placeholder="Enter new API Key" class="apikey-input">
         <button id="saveApiKeyBtn" class="translate-btn" style="margin-top:0.5rem;font-size: 1rem;">Lưu</button>
       </div>
     `;
@@ -39,12 +39,12 @@ function renderApiKeySection(hasKey) {
     document.getElementById('saveApiKeyBtn').onclick = () => {
       const apiKey = document.getElementById('apiKeyInput').value.trim();
       if (!apiKey) {
-        document.getElementById('saveStatus').textContent = "API Key không được để trống";
+        document.getElementById('saveStatus').textContent = "API Key cannot be empty";
         document.getElementById('saveStatus').style.color = "red";
         return;
       }
       chrome.storage.local.set({ openaiApiKey: apiKey }, () => {
-        document.getElementById('saveStatus').textContent = "Đã lưu!";
+        document.getElementById('saveStatus').textContent = "Saved!";
         document.getElementById('saveStatus').style.color = "green";
         setTimeout(() => {
           document.getElementById('saveStatus').textContent = "";
@@ -54,19 +54,19 @@ function renderApiKeySection(hasKey) {
     };
   } else {
     section.innerHTML = `
-      <input type="password" id="apiKeyInput" class="apikey-input" placeholder="Nhập OpenAI API Key">
+      <input type="password" id="apiKeyInput" class="apikey-input" placeholder="Enter OpenAI API Key">
       <button id="saveApiKeyBtn" class="translate-btn" style="margin-top:0.5rem;font-size: 0.8rem;">Lưu</button>
       <span id="saveStatus" style="margin-left: 8px; color: green;"></span>
     `;
     document.getElementById('saveApiKeyBtn').onclick = () => {
       const apiKey = document.getElementById('apiKeyInput').value.trim();
       if (!apiKey) {
-        document.getElementById('saveStatus').textContent = "API Key không được để trống";
+        document.getElementById('saveStatus').textContent = "API Key not set!";
         document.getElementById('saveStatus').style.color = "red";
         return;
       }
       chrome.storage.local.set({ openaiApiKey: apiKey }, () => {
-        document.getElementById('saveStatus').textContent = "Đã lưu!";
+        document.getElementById('saveStatus').textContent = "Saved!";
         document.getElementById('saveStatus').style.color = "green";
         setTimeout(() => {
           document.getElementById('saveStatus').textContent = "";
@@ -109,7 +109,7 @@ document.getElementById('translateBtn').addEventListener('click', async () => {
   });
 
   if (!apiKey) {
-      document.getElementById('outputText').value = 'Chưa thiết lập API Key!';
+      document.getElementById('outputText').value = 'API Key not set!!';
       return;
   }
 
@@ -117,14 +117,14 @@ document.getElementById('translateBtn').addEventListener('click', async () => {
   const targetLang = document.querySelector('input[name="targetLanguage"]:checked').value;
 
   if (!inputText) {
-    alert('Vui lòng nhập văn bản để dịch.');
+    alert('Please enter text to translate.');
     return;
   }
 
   // Lưu lại lựa chọn
   chrome.storage.local.set({ lastLang: targetLang });
 
-  document.getElementById('outputText').value = 'Đang dịch...';
+  document.getElementById('outputText').value = 'Translating...';
 
   const endpoint = 'https://api.openai.com/v1/chat/completions';
 
@@ -178,10 +178,10 @@ Text: ${inputText}
       const translation = data.choices[0].message.content.trim();
       document.getElementById('outputText').value = translation;
     } else {
-      document.getElementById('outputText').value = 'Lỗi: Không nhận được phản hồi từ API.';
+      document.getElementById('outputText').value = '	Error: No response from API.';
     }
   } catch (error) {
-    document.getElementById('outputText').value = 'Lỗi kết nối tới OpenAI API.';
+    document.getElementById('outputText').value = 'Error connecting to OpenAI API.';
     console.error(error);
   }
 });
